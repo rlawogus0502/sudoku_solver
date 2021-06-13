@@ -1,1 +1,354 @@
-# sudoku_solver
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8">
+    <style>
+        #box1{
+            border: 1px solid rgb(59, 223, 59);
+        }
+        #box2{
+            border: 1px solid rgb(226, 100, 159);
+            
+        }
+        #box3{
+            border: 1px solid rgb(86, 86, 180);
+            
+        }
+        #box4{
+            border: 1px solid rgb(197, 59, 40);
+            
+        }
+        #box5{
+            border: 1px solid rgb(65, 172, 199);
+            
+        }
+        #box6{
+            border: 1px solid rgb(228, 240, 61);
+        
+        }
+        #box7{
+            border: 1px solid rgb(194, 145, 39);
+            
+        }
+        #box8{
+            border: 1px solid rgb(126, 14, 79);
+            
+        }
+        #box9{
+            border: 1px solid rgb(166, 230, 166);
+            
+        }
+        #outputsudoku{
+
+            width: 100%;
+            height: 80%;
+        }
+    </style>
+    <h1> sudoku solver</h1>
+    <p>please write the numbers of the sudoku(write '0' when it is blank)</p>
+    <table id="inputsudoku">
+        <tr>
+            <td id="box1"><input type="number" id="0-0" min="0" max="9"></td>
+            <td id="box1"><input type="number" id="0-1" min="0" max="9"></td>
+            <td id="box1"><input type="number" id="0-2" min="0" max="9"></td>
+            <td id="box2"><input type="number" id="0-3" min="0" max="9"></td>
+            <td id="box2"><input type="number" id="0-4" min="0" max="9"></td>
+            <td id="box2"><input type="number" id="0-5" min="0" max="9"></td>
+            <td id="box3"><input type="number" id="0-6" min="0" max="9"></td>
+            <td id="box3"><input type="number" id="0-7" min="0" max="9"></td>
+            <td id="box3"><input type="number" id="0-8" min="0" max="9"></td>
+        </tr>
+        <tr>
+            <td id="box1"><input type="number" id="1-0" min="0" max="9"></td>
+            <td id="box1"><input type="number" id="1-1" min="0" max="9"></td>
+            <td id="box1"><input type="number" id="1-2" min="0" max="9"></td>
+            <td id="box2"><input type="number" id="1-3" min="0" max="9"></td>
+            <td id="box2"><input type="number" id="1-4" min="0" max="9"></td>
+            <td id="box2"><input type="number" id="1-5" min="0" max="9"></td>
+            <td id="box3"><input type="number" id="1-6" min="0" max="9"></td>
+            <td id="box3"><input type="number" id="1-7" min="0" max="9"></td>
+            <td id="box3"><input type="number" id="1-8" min="0" max="9"></td>
+        </tr>
+        <tr>
+            <td id="box1"><input type="number" id="2-0" min="0" max="9"></td>
+            <td id="box1"><input type="number" id="2-1" min="0" max="9"></td>
+            <td id="box1"><input type="number" id="2-2" min="0" max="9"></td>
+            <td id="box2"><input type="number" id="2-3" min="0" max="9"></td>
+            <td id="box2"><input type="number" id="2-4" min="0" max="9"></td>
+            <td id="box2"><input type="number" id="2-5" min="0" max="9"></td>
+            <td id="box3"><input type="number" id="2-6" min="0" max="9"></td>
+            <td id="box3"><input type="number" id="2-7" min="0" max="9"></td>
+            <td id="box3"><input type="number" id="2-8" min="0" max="9"></td>
+        </tr>
+        <tr>
+            <td id="box4"><input type="number" id="3-0" min="0" max="9"></td>
+            <td id="box4"><input type="number" id="3-1" min="0" max="9"></td>
+            <td id="box4"><input type="number" id="3-2" min="0" max="9"></td>
+            <td id="box5"><input type="number" id="3-3" min="0" max="9"></td>
+            <td id="box5"><input type="number" id="3-4" min="0" max="9"></td>
+            <td id="box5"><input type="number" id="3-5" min="0" max="9"></td>
+            <td id="box6"><input type="number" id="3-6" min="0" max="9"></td>
+            <td id="box6"><input type="number" id="3-7" min="0" max="9"></td>
+            <td id="box6"><input type="number" id="3-8" min="0" max="9"></td>
+        </tr>
+        <tr>
+            <td id="box4"><input type="number" id="4-0" min="0" max="9"></td>
+            <td id="box4"><input type="number" id="4-1" min="0" max="9"></td>
+            <td id="box4"><input type="number" id="4-2" min="0" max="9"></td>
+            <td id="box5"><input type="number" id="4-3" min="0" max="9"></td>
+            <td id="box5"><input type="number" id="4-4" min="0" max="9"></td>
+            <td id="box5"><input type="number" id="4-5" min="0" max="9"></td>
+            <td id="box6"><input type="number" id="4-6" min="0" max="9"></td>
+            <td id="box6"><input type="number" id="4-7" min="0" max="9"></td>
+            <td id="box6"><input type="number" id="4-8" min="0" max="9"></td>
+        </tr>
+        <tr>
+            <td id="box4"><input type="number" id="5-0" min="0" max="9"></td>
+            <td id="box4"><input type="number" id="5-1" min="0" max="9"></td>
+            <td id="box4"><input type="number" id="5-2" min="0" max="9"></td>
+            <td id="box5"><input type="number" id="5-3" min="0" max="9"></td>
+            <td id="box5"><input type="number" id="5-4" min="0" max="9"></td>
+            <td id="box5"><input type="number" id="5-5" min="0" max="9"></td>
+            <td id="box6"><input type="number" id="5-6" min="0" max="9"></td>
+            <td id="box6"><input type="number" id="5-7" min="0" max="9"></td>
+            <td id="box6"><input type="number" id="5-8" min="0" max="9"></td>
+        </tr>
+        <tr>
+            <td id="box7"><input type="number" id="6-0" min="0" max="9"></td>
+            <td id="box7"><input type="number" id="6-1" min="0" max="9"></td>
+            <td id="box7"><input type="number" id="6-2" min="0" max="9"></td>
+            <td id="box8"><input type="number" id="6-3" min="0" max="9"></td>
+            <td id="box8"><input type="number" id="6-4" min="0" max="9"></td>
+            <td id="box8"><input type="number" id="6-5" min="0" max="9"></td>
+            <td id="box9"><input type="number" id="6-6" min="0" max="9"></td>
+            <td id="box9"><input type="number" id="6-7" min="0" max="9"></td>
+            <td id="box9"><input type="number" id="6-8" min="0" max="9"></td>
+        </tr>
+        <tr>
+            <td id="box7"><input type="number" id="7-0" min="0" max="9"></td>
+            <td id="box7"><input type="number" id="7-1" min="0" max="9"></td>
+            <td id="box7"><input type="number" id="7-2" min="0" max="9"></td>
+            <td id="box8"><input type="number" id="7-3" min="0" max="9"></td>
+            <td id="box8"><input type="number" id="7-4" min="0" max="9"></td>
+            <td id="box8"><input type="number" id="7-5" min="0" max="9"></td>
+            <td id="box9"><input type="number" id="7-6" min="0" max="9"></td>
+            <td id="box9"><input type="number" id="7-7" min="0" max="9"></td>
+            <td id="box9"><input type="number" id="7-8" min="0" max="9"></td>
+        </tr>
+        <tr>
+            <td id="box7"><input type="number" id="8-0" min="0" max="9"></td>
+            <td id="box7"><input type="number" id="8-1" min="0" max="9"></td>
+            <td id="box7"><input type="number" id="8-2" min="0" max="9"></td>
+            <td id="box8"><input type="number" id="8-3" min="0" max="9"></td>
+            <td id="box8"><input type="number" id="8-4" min="0" max="9"></td>
+            <td id="box8"><input type="number" id="8-5" min="0" max="9"></td>
+            <td id="box9"><input type="number" id="8-6" min="0" max="9"></td>
+            <td id="box9"><input type="number" id="8-7" min="0" max="9"></td>
+            <td id="box9"><input type="number" id="8-8" min="0" max="9"></td>
+        </tr>
+    </table>
+    <p id="anssentence" style="display:none">this is the answer</p>
+    <table id="outputsudoku" style="display:none">
+        <tr>
+            <td id="box1"><span id="0-0_out"></span></td>
+            <td id="box1"><span id="0-1_out"></span></td>
+            <td id="box1"><span id="0-2_out"></span></td>
+            <td id="box2"><span id="0-3_out"></span></td>
+            <td id="box2"><span id="0-4_out"></span></td>
+            <td id="box2"><span id="0-5_out"></span></td>
+            <td id="box3"><span id="0-6_out"></span></td>
+            <td id="box3"><span id="0-7_out"></span></td>
+            <td id="box3"><span id="0-8_out"></span></td>
+        </tr>
+        <tr>
+            <td id="box1"><span id="1-0_out"></span></td>
+            <td id="box1"><span id="1-1_out"></span></td>
+            <td id="box1"><span id="1-2_out"></span></td>
+            <td id="box2"><span id="1-3_out"></span></td>
+            <td id="box2"><span id="1-4_out"></span></td>
+            <td id="box2"><span id="1-5_out"></span></td>
+            <td id="box3"><span id="1-6_out"></span></td>
+            <td id="box3"><span id="1-7_out"></span></td>
+            <td id="box3"><span id="1-8_out"></span></td>
+        </tr>
+        <tr>
+            <td id="box1"><span id="2-0_out"></span></td>
+            <td id="box1"><span id="2-1_out"></span></td>
+            <td id="box1"><span id="2-2_out"></span></td>
+            <td id="box2"><span id="2-3_out"></span></td>
+            <td id="box2"><span id="2-4_out"></span></td>
+            <td id="box2"><span id="2-5_out"></span></td>
+            <td id="box3"><span id="2-6_out"></span></td>
+            <td id="box3"><span id="2-7_out"></span></td>
+            <td id="box3"><span id="2-8_out"></span></td>
+        </tr>
+        <tr>
+            <td id="box4"><span id="3-0_out"></span></td>
+            <td id="box4"><span id="3-1_out"></span></td>
+            <td id="box4"><span id="3-2_out"></span></td>
+            <td id="box5"><span id="3-3_out"></span></td>
+            <td id="box5"><span id="3-4_out"></span></td>
+            <td id="box5"><span id="3-5_out"></span></td>
+            <td id="box6"><span id="3-6_out"></span></td>
+            <td id="box6"><span id="3-7_out"></span></td>
+            <td id="box6"><span id="3-8_out"></span></td>
+        </tr>
+        <tr>
+            <td id="box4"><span id="4-0_out"></span></td>
+            <td id="box4"><span id="4-1_out"></span></td>
+            <td id="box4"><span id="4-2_out"></span></td>
+            <td id="box5"><span id="4-3_out"></span></td>
+            <td id="box5"><span id="4-4_out"></span></td>
+            <td id="box5"><span id="4-5_out"></span></td>
+            <td id="box6"><span id="4-6_out"></span></td>
+            <td id="box6"><span id="4-7_out"></span></td>
+            <td id="box6"><span id="4-8_out"></span></td>
+        </tr>
+        <tr>
+            <td id="box4"><span id="5-0_out"></span></td>
+            <td id="box4"><span id="5-1_out"></span></td>
+            <td id="box4"><span id="5-2_out"></span></td>
+            <td id="box5"><span id="5-3_out"></span></td>
+            <td id="box5"><span id="5-4_out"></span></td>
+            <td id="box5"><span id="5-5_out"></span></td>
+            <td id="box6"><span id="5-6_out"></span></td>
+            <td id="box6"><span id="5-7_out"></span></td>
+            <td id="box6"><span id="5-8_out"></span></td>
+        </tr>
+        <tr>
+            <td id="box7"><span id="6-0_out"></span></td>
+            <td id="box7"><span id="6-1_out"></span></td>
+            <td id="box7"><span id="6-2_out"></span></td>
+            <td id="box8"><span id="6-3_out"></span></td>
+            <td id="box8"><span id="6-4_out"></span></td>
+            <td id="box8"><span id="6-5_out"></span></td>
+            <td id="box9"><span id="6-6_out"></span></td>
+            <td id="box9"><span id="6-7_out"></span></td>
+            <td id="box9"><span id="6-8_out"></span></td>
+        </tr>
+        <tr>
+            <td id="box7"><span id="7-0_out"></span></td>
+            <td id="box7"><span id="7-1_out"></span></td>
+            <td id="box7"><span id="7-2_out"></span></td>
+            <td id="box8"><span id="7-3_out"></span></td>
+            <td id="box8"><span id="7-4_out"></span></td>
+            <td id="box8"><span id="7-5_out"></span></td>
+            <td id="box9"><span id="7-6_out"></span></td>
+            <td id="box9"><span id="7-7_out"></span></td>
+            <td id="box9"><span id="7-8_out"></span></td>
+        </tr>
+        <tr>
+            <td id="box7"><span id="8-1_out"></span></td>
+            <td id="box7"><span id="8-2_out"></span></td>
+            <td id="box7"><span id="8-0_out"></span></td>
+            <td id="box8"><span id="8-3_out"></span></td>
+            <td id="box8"><span id="8-4_out"></span></td>
+            <td id="box8"><span id="8-5_out"></span></td>
+            <td id="box9"><span id="8-6_out"></span></td>
+            <td id="box9"><span id="8-7_out"></span></td>
+            <td id="box9"><span id="8-8_out"></span></td>
+        </tr>
+    </table>
+    <p><button onclick="showans()">show me the answer</button></p>
+    <script>
+        sudoku=[];
+        uncertain_row=[];
+        uncertain_col=[];
+        practice=[];
+        function seek(i,j,num){
+            for(var k=0; k<9; k++){
+                if(j!=k && sudoku[9*i+k]==num){
+                    return false;
+                }
+            }
+            for(var k=0; k<9; k++){
+                if(i!=k && sudoku[9*k+j]==num){
+                    return false;
+                }
+            }
+            for(var m=i-i%3; m<i-i%3+3; m++){
+                for(var n=j-j%3; n<j-j%3+3; n++){
+                    if((i!=m && j!=n) && sudoku[9*m+n]==num){
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        function showans(){
+            document.getElementById('anssentence').style.display='block';
+            document.getElementById('outputsudoku').style.display='block';
+            
+            for(var i=0; i<9; i++){
+                for(var j=0; j<9; j++){
+                    sudoku.push(document.getElementById(i+"-"+j).value);
+                }    
+            }
+            for(var i=0; i<9; i++){
+                for(var j=0; j<9; j++){
+                    if(sudoku[9*i+j]==0){
+                        uncertain_row.push(i);
+                        uncertain_col.push(j);
+                    }
+                }
+            }
+            for(var coor=0; coor<uncertain_row.length; coor++){
+                i=uncertain_row[coor];
+                j=uncertain_col[coor];
+                temp=''
+                for(var n=1; n<=9; n++){
+                    if (seek(i,j,n)){
+                        n.toString(10);
+                        temp+=n;
+                    }
+                }
+                practice.push(temp);
+            }
+            var coor=0;
+            var flag=0;
+            var seq=[];
+            for(var i=0; i<uncertain_row.length; i++){
+                seq.push(-1);
+            }
+            while(true){
+                i=uncertain_row[coor];
+                j=uncertain_col[coor];
+                if(seq[coor]==practice[coor].length-1){
+                    seq[coor]=-1;
+                    sudoku[9*i+j]=0;
+                    coor--;
+                }
+                else{
+                    seq[coor]++;
+                    sudoku[9*i+j]=Number(practice[coor].slice(seq[coor],seq[coor]+1));
+                    if(seek(i,j,sudoku[i*9+j])){
+                        coor++;
+                        if(coor==uncertain_row.length){
+                            break;
+                        }
+                    }
+                    else{
+                        if(coor>0 && seq[coor]==practice[coor].length-1){
+                            if(coor==uncertain_row.length-1){
+                                flag=1;
+                                document.write('unable to solve');
+                                break;
+                            }
+                            else{
+                                seq[coor]=-1;
+                                sudoku[9*i+j]=0;
+                                coor--;
+                            }
+                        }
+                    }
+                }
+            }
+            if(flag==0){
+                for(var i=0; i<9; i++){
+                    for(var j=0; j<9; j++){
+                        document.getElementById(i+"-"+j+"_out").innerHTML=String(sudoku[i*9+j])+'  ';
+                    }
+                }
+            }
+        }
+    </script>
+</html>
